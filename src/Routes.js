@@ -22,7 +22,7 @@ const Routes = () => {
     `
     const routes = [
         {
-            path: '/',
+            path: '/mocs-client',
             component: Home,
             layout: Main,
             exact: true,

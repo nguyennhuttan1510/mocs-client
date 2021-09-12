@@ -44,7 +44,7 @@ const Main = (props) => {
                     <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
                         <Menu.Item key='1' icon={<PieChartOutlined />}>
                             <NavLink
-                                to='/'
+                                to='/mocs-client'
                                 onClick={() => {
                                     setHeaderTitle('Dashboard')
                                 }}

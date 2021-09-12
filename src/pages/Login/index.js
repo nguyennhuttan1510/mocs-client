@@ -23,7 +23,7 @@ const Login = (props) => {
         }
         dispatch(CONSTANT.ACTION_TYPE.LOGIN, value, (res) => {
             if (res.status) {
-                history.push('/')
+                history.push('/mocs-client')
             }
         })
         // console.log(authAction.login(account));
