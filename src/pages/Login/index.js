@@ -23,32 +23,10 @@ const Login = (props) => {
         }
         dispatch(CONSTANT.ACTION_TYPE.LOGIN, value, (res) => {
             if (res.status) {
-                history.push('/mocs-client')
+                // history.push('/mocs-client')
+                history.push('/users/3')
             }
         })
-        // console.log(authAction.login(account));
-        // Authenticator.signin(acc).then((response) => {
-        //   if (!response) {
-        //     openNotificationWithIcon(
-        //       "error",
-        //       "Login Failed",
-        //       "Username or Password incorrect"
-        //     );
-        //     return;
-        //   }
-        //   if (response.status && response.data) {
-        //     dispatch(getProfile(response.data));
-        //     //DIVIDE PAGE FOR POSITION
-        //     if (response.data?.position === "Admin") {
-        //       dispatch(setTitleHeader("Management Business"));
-        //       history.push("/admin/management-business");
-
-        //       return;
-        //     }
-        //     dispatch(setTitleHeader("Dashboard"));
-        //     history.push("/MoCS");
-        //   }
-        // });
     }
 
     const onFinishFailed = (errorInfo) => {

@@ -3,7 +3,14 @@ import { useSelector } from 'react-redux'
 import { Route, useHistory, Redirect } from 'react-router-dom'
 
 const RouteWithLayout = (props) => {
-    const { layout: Layout, component: Component, path, ...rest } = props
+    const {
+        layout: Layout,
+        component: Component,
+        path,
+        isHeader,
+        name,
+        ...rest
+    } = props
     const history = useHistory()
     const profile = useSelector((state) => state.user.profile)
 
@@ -17,7 +24,7 @@ const RouteWithLayout = (props) => {
         <Route
             {...rest}
             render={(matchProps) => (
-                <Layout {...matchProps}>
+                <Layout isHeader={isHeader} titleHeader={name} {...matchProps}>
                     <Component {...matchProps} />
                 </Layout>
             )}

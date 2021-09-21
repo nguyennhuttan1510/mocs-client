@@ -13,7 +13,7 @@ const upCaseFirst = (string) => {
         .toLowerCase()
         .split(' ')
         .map(function (Word) {
-            return Word[0].toUpperCase() + Word.substr(1)
+            return Word[0].toUpperCase() + Word.slice(1)
         })
         .join(' ')
 }

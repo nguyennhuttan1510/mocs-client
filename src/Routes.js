@@ -7,12 +7,15 @@ import ScaleLoader from 'react-spinners/ScaleLoader'
 import RouteWithLayout from 'components/RouteWithLayout'
 
 const Main = lazy(() => import('layouts/Main'))
+const UserLayout = lazy(() => import('layouts/UserLayout'))
 const NoLayout = lazy(() => import('layouts/NoLayout'))
 const SignIn = lazy(() => import('pages/Login'))
 const Home = lazy(() => import('pages/Home'))
 const Business = lazy(() => import('pages/Business'))
 const Personnel = lazy(() => import('pages/Personnel'))
 const Profile = lazy(() => import('pages/Profile'))
+const Users = lazy(() => import('pages/Users'))
+const DetailFood = lazy(() => import('pages/Users/subpages/DetailFood'))
 
 const Routes = () => {
     // CONFIG ROUTE
@@ -57,16 +60,31 @@ const Routes = () => {
             exact: true,
             name: 'Profile Page',
         },
-        // {
-        //     path: '*',
-        //     component: () => (
-        //         <div>
-        //             <h1>Page not found</h1>
-        //         </div>
-        //     ),
-        //     layout: NoLayout,
-        //     name: 'Page Not Found',
-        // },
+        {
+            path: '/users/:id',
+            component: Users,
+            layout: UserLayout,
+            exact: true,
+            name: 'Users Page',
+        },
+        {
+            path: '/users/food-detail/:id',
+            component: DetailFood,
+            layout: UserLayout,
+            exact: true,
+            name: 'Detail Food Page',
+            isHeader: true, //show header for UI Mobile
+        },
+        {
+            path: '*',
+            component: () => (
+                <div>
+                    <h1>Page not found</h1>
+                </div>
+            ),
+            layout: NoLayout,
+            name: 'Page Not Found',
+        },
     ]
 
     return (
@@ -79,7 +97,6 @@ const Routes = () => {
                             css={override}
                             color={'#001529'}
                         />
-                        {/* ...loading */}
                     </div>
                 )
             }
@@ -93,6 +110,7 @@ const Routes = () => {
                         component={item.component}
                         exact={item.exact}
                         path={item.path}
+                        isHeader={item?.isHeader || false}
                     />
                 ))}
             </Switch>

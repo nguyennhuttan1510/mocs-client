@@ -1,0 +1,78 @@
+@import 'App.scss';
+.home-user-page {
+    .name {
+        font-weight: 600;
+    }
+    .avatar {
+        background-color: gray;
+        width: 45px;
+        height: 45px;
+        border-radius: 10px;
+    }
+    .card-food {
+        padding: 8px;
+        .title {
+            font-weight: 600;
+            margin: 0;
+        }
+        p {
+            font-size: 14px;
+            color: gray;
+            margin-bottom: 0.5em;
+        }
+        .price {
+            font-size: 20px;
+            margin: 8px 0 0;
+            display: flex;
+            align-items: center;
+            float: right;
+            color: red;
+            .icon-price {
+                transform: rotateZ(90deg);
+            }
+        }
+    }
+    .padding-block {
+        margin: 10px -16px;
+    }
+    .slider,
+    .slider-category {
+        padding: 16px 0;
+        .slick-list {
+            padding: 10px 50px !important;
+        }
+        .block-slider,
+        .category {
+            height: 200px;
+            margin: 0 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0px 5px 7px -2px black;
+            @include bg-image($border-radius, black, 0.6);
+            .title,
+            .title-category {
+                color: red;
+                z-index: 1;
+                font-weight: 600;
+            }
+            .title-category {
+                color: white;
+            }
+        }
+        .category {
+            height: 140px;
+        }
+    }
+    .slider-category {
+        .slick-list {
+            padding: 10px 0px !important;
+        }
+    }
+    .title-bestseller {
+        font-weight: 600;
+        margin: 0;
+    }
+}
