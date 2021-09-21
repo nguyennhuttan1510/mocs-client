@@ -51,7 +51,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0px 5px 7px -2px black;
-            @include bg-image($border-radius, black, 0.6);
+            @include bg-image($border-radius, black, 0.5);
             .title,
             .title-category {
                 color: red;

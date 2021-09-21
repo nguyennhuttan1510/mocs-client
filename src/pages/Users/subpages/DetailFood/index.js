@@ -60,18 +60,20 @@ const DetailFood = (props) => {
                 <Grid item xs={6}>
                     <h2>Shusi Kinamoto</h2>
                     <div className='icon-rank'>
-                        <Star />
-                        <Star />
-                        <Star />
-                        <Star />
-                    </div>
-                    <div className='icon-feedback'>
-                        <Favorite className='item' />
-                        <ThumbUp className='item' />
-                        <ThumbDownAlt className='item' />
+                        <Star fontSize='small' />
+                        <Star fontSize='small' />
+                        <Star fontSize='small' />
+                        <Star fontSize='small' />
                     </div>
                 </Grid>
-                <Grid className='price-food' item xs={6}>
+                <Grid
+                    className='price-food'
+                    item
+                    xs={6}
+                    container
+                    direction='column'
+                    alignItems='flex-end'
+                >
                     <div className='price'>
                         <h2>$8</h2>
                         <span>/combo</span>
@@ -83,8 +85,14 @@ const DetailFood = (props) => {
                     </div>
                 </Grid>
             </Grid>
-            <Grid container mt={2}>
-                <Grid item xs={6}></Grid>
+            <Grid className='info-food' container mt={1} alignItems='center'>
+                <Grid item xs={6}>
+                    <div className='icon-feedback'>
+                        <Favorite className='item' />
+                        <ThumbUp className='item' />
+                        <ThumbDownAlt className='item' />
+                    </div>
+                </Grid>
                 <Grid container xs={6} direction='row' justifyContent='flex-end'>
                     <Button
                         className='btn btn--primary'

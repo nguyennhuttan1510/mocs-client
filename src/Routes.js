@@ -16,6 +16,7 @@ const Personnel = lazy(() => import('pages/Personnel'))
 const Profile = lazy(() => import('pages/Profile'))
 const Users = lazy(() => import('pages/Users'))
 const DetailFood = lazy(() => import('pages/Users/subpages/DetailFood'))
+const ListOrder = lazy(() => import('pages/Users/subpages/ListOrder'))
 
 const Routes = () => {
     // CONFIG ROUTE
@@ -72,7 +73,15 @@ const Routes = () => {
             component: DetailFood,
             layout: UserLayout,
             exact: true,
-            name: 'Detail Food Page',
+            name: 'Detail Food',
+            isHeader: true, //show header for UI Mobile
+        },
+        {
+            path: '/users/order/:id',
+            component: ListOrder,
+            layout: UserLayout,
+            exact: true,
+            name: 'Your Order',
             isHeader: true, //show header for UI Mobile
         },
         {

@@ -5,7 +5,7 @@ $border-radius: 20px;
 $primary-color: rgb(25, 118, 210);
 $danger-color: rgb(255, 49, 49);
 $warning-color: rgb(253, 164, 29);
-$success-color: rgb(56, 253, 45);
+$success-color: #00e407;
 //ANYTHING WHITE COLOR
 $theme-color: white;
 @mixin bg-image($border-radius, $isBackground, $opacity) {
@@ -25,6 +25,7 @@ $theme-color: white;
 }
 
 .btn {
+    height: 36px;
     border-radius: $border-radius;
     &.btn--primary {
         background-color: $primary-color;
@@ -54,6 +55,6 @@ html {
     body {
         height: 100%;
         font-family: 'Cairo', sans-serif;
-        overflow-x: clip;
+        overflow-x: hidden;
     }
 }

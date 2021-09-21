@@ -8,6 +8,7 @@ import {
     AddAlarm,
 } from '@mui/icons-material'
 import { Paper, BottomNavigation, BottomNavigationAction } from '@mui/material'
+import { NavLink } from 'react-router-dom'
 
 const Footer = (props) => {
     return (
@@ -26,7 +27,9 @@ const Footer = (props) => {
                 <BottomNavigationAction icon={<CardGiftcard />} />
                 <BottomNavigationAction icon={<Home />} />
                 <BottomNavigationAction icon={<AddAlarm />} />
-                <BottomNavigationAction icon={<ShoppingCart />} />
+                <NavLink to='/users/order/3'>
+                    <BottomNavigationAction icon={<ShoppingCart />} />
+                </NavLink>
             </BottomNavigation>
         </Paper>
     )

@@ -12,8 +12,11 @@
         h2 {
             margin: 0;
         }
+        .icon-rank {
+            color: #ffec16;
+        }
+
         .icon-feedback {
-            margin-top: 10px;
             .item {
                 &:first-child {
                     margin-left: 0px;
@@ -22,10 +25,6 @@
             }
         }
         .price-food {
-            display: flex;
-            flex-direction: column;
-            align-items: end;
-
             .price {
                 display: flex;
                 justify-content: end;
@@ -40,12 +39,12 @@
             .count {
                 display: flex;
                 width: 110px;
-                background: antiquewhite;
+                background: #e6e6e6;
                 justify-content: space-around;
                 border-radius: $border-radius;
                 align-items: center;
                 height: 40px;
-                margin-top: 20px;
+                // margin-top: 20px;
                 & div:last-child,
                 div:first-child {
                     font-size: 22px;

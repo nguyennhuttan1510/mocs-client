@@ -15,6 +15,8 @@ import { LocalOffer } from '@mui/icons-material'
 import Slider from 'react-slick'
 import { NavLink } from 'react-router-dom'
 const Users = (props) => {
+    const LIST_FOOD = [1, 2, 3, 4, 5, 6]
+
     const settings = {
         dots: true,
         className: 'padding-block',
@@ -130,140 +132,35 @@ const Users = (props) => {
                 <Grid item xs={12}>
                     <h2 className='title-bestseller'>Bestseller</h2>
                 </Grid>
-                <Grid item xs={6}>
-                    <NavLink to='/users/food-detail/1'>
-                        <Card sx={{ maxWidth: 345 }}>
-                            <CardMedia
-                                component='img'
-                                height='140'
-                                src={`${process.env.PUBLIC_URL}/assets/images/pexels-christel-jensen-628776.jpg`}
-                                alt='green iguana'
-                            />
-                            <CardContent className='card-food'>
-                                <h3 className='title'>Shusi Kinamoto</h3>
-                                <p>Lizards are a wide spread</p>
-                                <h3 className='price'>
-                                    <LocalOffer className='icon-price' />
-                                    $8
-                                </h3>
-                            </CardContent>
-                            {/* <CardActions>
+                {LIST_FOOD.map((e) => (
+                    <Grid item xs={6}>
+                        <NavLink to='/users/food-detail/1'>
+                            <Card sx={{ maxWidth: 345 }}>
+                                <CardMedia
+                                    component='img'
+                                    height='140'
+                                    src={`${process.env.PUBLIC_URL}/assets/images/pexels-christel-jensen-628776.jpg`}
+                                    alt='green iguana'
+                                />
+                                <CardContent className='card-food'>
+                                    <h3 className='title'>Shusi Kinamoto</h3>
+                                    <p>Lizards are a wide spread</p>
+                                    <h3 className='price'>
+                                        <LocalOffer
+                                            className='icon-price'
+                                            fontSize='small'
+                                        />
+                                        $8
+                                    </h3>
+                                </CardContent>
+                                {/* <CardActions>
                             <Button size='small'>Share</Button>
                             <Button size='small'>Learn More</Button>
                         </CardActions> */}
-                        </Card>
-                    </NavLink>
-                </Grid>
-                <Grid item xs={6}>
-                    <Card sx={{ maxWidth: 345 }}>
-                        <CardMedia
-                            component='img'
-                            height='140'
-                            src={`${process.env.PUBLIC_URL}/assets/images/pexels-christel-jensen-628776.jpg`}
-                            alt='green iguana'
-                        />
-                        <CardContent className='card-food'>
-                            <h3 className='title'>Shusi Kinamoto</h3>
-                            <p>Lizards are a wide spread</p>
-                            <h3 className='price'>
-                                <LocalOffer className='icon-price' />
-                                $8
-                            </h3>
-                        </CardContent>
-                        {/* <CardActions>
-                            <Button size='small'>Share</Button>
-                            <Button size='small'>Learn More</Button>
-                        </CardActions> */}
-                    </Card>
-                </Grid>
-                <Grid item xs={6}>
-                    <Card sx={{ maxWidth: 345 }}>
-                        <CardMedia
-                            component='img'
-                            height='140'
-                            src={`${process.env.PUBLIC_URL}/assets/images/pexels-christel-jensen-628776.jpg`}
-                            alt='green iguana'
-                        />
-                        <CardContent className='card-food'>
-                            <h3 className='title'>Shusi Kinamoto</h3>
-                            <p>Lizards are a wide spread</p>
-                            <h3 className='price'>
-                                <LocalOffer className='icon-price' />
-                                $8
-                            </h3>
-                        </CardContent>
-                        {/* <CardActions>
-                            <Button size='small'>Share</Button>
-                            <Button size='small'>Learn More</Button>
-                        </CardActions> */}
-                    </Card>
-                </Grid>
-                <Grid item xs={6}>
-                    <Card sx={{ maxWidth: 345 }}>
-                        <CardMedia
-                            component='img'
-                            height='140'
-                            src={`${process.env.PUBLIC_URL}/assets/images/pexels-christel-jensen-628776.jpg`}
-                            alt='green iguana'
-                        />
-                        <CardContent className='card-food'>
-                            <h3 className='title'>Shusi Kinamoto</h3>
-                            <p>Lizards are a wide spread</p>
-                            <h3 className='price'>
-                                <LocalOffer className='icon-price' />
-                                $8
-                            </h3>
-                        </CardContent>
-                        {/* <CardActions>
-                            <Button size='small'>Share</Button>
-                            <Button size='small'>Learn More</Button>
-                        </CardActions> */}
-                    </Card>
-                </Grid>
-                <Grid item xs={6}>
-                    <Card sx={{ maxWidth: 345 }}>
-                        <CardMedia
-                            component='img'
-                            height='140'
-                            src={`${process.env.PUBLIC_URL}/assets/images/pexels-christel-jensen-628776.jpg`}
-                            alt='green iguana'
-                        />
-                        <CardContent className='card-food'>
-                            <h3 className='title'>Shusi Kinamoto</h3>
-                            <p>Lizards are a wide spread</p>
-                            <h3 className='price'>
-                                <LocalOffer className='icon-price' />
-                                $8
-                            </h3>
-                        </CardContent>
-                        {/* <CardActions>
-                            <Button size='small'>Share</Button>
-                            <Button size='small'>Learn More</Button>
-                        </CardActions> */}
-                    </Card>
-                </Grid>
-                <Grid item xs={6}>
-                    <Card sx={{ maxWidth: 345 }}>
-                        <CardMedia
-                            component='img'
-                            height='140'
-                            src={`${process.env.PUBLIC_URL}/assets/images/pexels-christel-jensen-628776.jpg`}
-                            alt='green iguana'
-                        />
-                        <CardContent className='card-food'>
-                            <h3 className='title'>Shusi Kinamoto</h3>
-                            <p>Lizards are a wide spread</p>
-                            <h3 className='price'>
-                                <LocalOffer className='icon-price' />
-                                $8
-                            </h3>
-                        </CardContent>
-                        {/* <CardActions>
-                            <Button size='small'>Share</Button>
-                            <Button size='small'>Learn More</Button>
-                        </CardActions> */}
-                    </Card>
-                </Grid>
+                            </Card>
+                        </NavLink>
+                    </Grid>
+                ))}
             </Grid>
         </div>
     )
