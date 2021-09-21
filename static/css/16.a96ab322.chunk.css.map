@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/pages/Login/style.scss"],"names":[],"mappings":"AAAA,YACI,sBAAA,CACA,uBAAA,CACA,0DAAA","file":"16.a96ab322.chunk.css","sourcesContent":[".form-login {\n    padding: 40px 20px 20px;\n    background-color: tomato;\n    box-shadow: 4px 5px 12px -1px #00000061;\n}\n"]}
