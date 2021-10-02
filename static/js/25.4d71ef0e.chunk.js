@@ -1,2 +1,0 @@
-(this.webpackJsonpmocs=this.webpackJsonpmocs||[]).push([[25],{578:function(c,n,s){},734:function(c,n,s){"use strict";s.r(n);s(0),s(578);var t=s(5);n.default=function(c){var n=c.children;return Object(t.jsx)("div",{className:"nolayout",children:n})}}}]);
-//# sourceMappingURL=25.4d71ef0e.chunk.js.map
