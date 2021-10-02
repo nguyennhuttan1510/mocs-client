@@ -10,12 +10,19 @@ const ListTable = (props) => {
         const isOrderedTable = listTable.some(
             (e) => e.id === item.id && e.isMakeFood
         )
-        if (isActiveTable && isOrderedTable) {
-            return 'processing'
-        }
+        const isPay = listTable.some((e) => e.id === item.id && e.isPay)
+        let result = ''
         if (isActiveTable) {
-            return 'active'
+            result = 'active'
+
+            if (isOrderedTable) {
+                result = 'processing'
+            }
+            if (isOrderedTable && isPay) {
+                result = 'call-pay'
+            }
         }
+        return result
     }
 
     const foodStatusOrder = (item) => {

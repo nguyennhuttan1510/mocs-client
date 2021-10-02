@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
     ShoppingCart,
     CardGiftcard,
@@ -8,9 +7,23 @@ import {
     AddAlarm,
 } from '@mui/icons-material'
 import { Paper, BottomNavigation, BottomNavigationAction } from '@mui/material'
-import { NavLink } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { LIST_PATH_NAVIGATION } from 'constants/index'
 
 const Footer = (props) => {
+    const { pathCurrent } = props
+    const history = useHistory()
+    const setCurrentNavigation = (event, tabKey) => {
+        LIST_PATH_NAVIGATION.forEach((element) => {
+            if (tabKey === element.index) {
+                history.push(element.path)
+            }
+        })
+    }
+    const tabKeyCurrent = () => {
+        const result = LIST_PATH_NAVIGATION.find((e) => e.path === pathCurrent)
+        return result ? result.index : -1
+    }
     return (
         <Paper
             sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
@@ -18,18 +31,14 @@ const Footer = (props) => {
         >
             <BottomNavigation
                 showLabels
-                // value={value}
-                // onChange={(event, newValue) => {
-                //     setValue(newValue)
-                // }}
+                value={tabKeyCurrent()}
+                onChange={setCurrentNavigation}
             >
                 <BottomNavigationAction icon={<AccountCircle />} />
                 <BottomNavigationAction icon={<CardGiftcard />} />
                 <BottomNavigationAction icon={<Home />} />
                 <BottomNavigationAction icon={<AddAlarm />} />
-                <NavLink to='/users/order/3'>
-                    <BottomNavigationAction icon={<ShoppingCart />} />
-                </NavLink>
+                <BottomNavigationAction icon={<ShoppingCart />} />
             </BottomNavigation>
         </Paper>
     )

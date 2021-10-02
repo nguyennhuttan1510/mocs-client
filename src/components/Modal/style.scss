@@ -1,0 +1,21 @@
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+input[type='file'] {
+    display: none !important;
+}
+.bg-image-menu {
+    margin-top: 16px;
+    width: 130px;
+    height: 130px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+// input[type='file' i]::-webkit-file-upload-button {
+//     display: none !important;
+// }

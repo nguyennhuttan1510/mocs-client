@@ -5,9 +5,7 @@ import { CONSTANT } from 'stores/constants'
 
 function* handleLogin(payload) {
     console.log('Login')
-    console.log(payload.params)
     const res = yield call(Authenticator.login, payload.params)
-    console.log('🚀 ~ file: auth.js ~ line 9 ~ function*handleLogin ~ res', res)
     if (res.status) {
         console.log('was accessed')
         yield put({ type: authAction.loginSuccess().type, payload: res.data })

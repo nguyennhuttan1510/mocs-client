@@ -1,5 +1,26 @@
 .form-login {
-    padding: 40px 20px 20px;
-    background-color: tomato;
+    width: 350px;
+    border-radius: 20px;
+    padding: 40px 20px;
+    background-color: rgb(255, 255, 255);
     box-shadow: 4px 5px 12px -1px #00000061;
+    .title-login {
+        text-align: center;
+        margin-bottom: 32px;
+    }
+    .login-form-button {
+        width: 100%;
+    }
+    .form-option {
+        width: 100%;
+    }
+    .type-login {
+        width: 50px;
+        text-align: end;
+        cursor: pointer;
+    }
+    .wrap-option {
+        display: flex;
+        justify-content: space-between;
+    }
 }

@@ -2,12 +2,23 @@ import HttpClient from 'services/httpClient'
 
 const httpClient = HttpClient()
 
-const requires = (formData) => ({
-    name: formData.name,
-    price: parseInt(formData.price),
-    category: formData.category,
-    discount: formData.discount ? parseInt(formData.discount) : 0,
-})
+const requires = (formData) => {
+    console.log(
+        '🚀 ~ file: table-and-menu.js ~ line 6 ~ requires ~ formData',
+        formData
+    )
+    let form = new FormData()
+
+    form.append('name', formData.name)
+    form.append('price', formData.price)
+    form.append('category', formData.category)
+    form.append('discount', formData.discount ? parseInt(formData.discount) : 0)
+    form.append('url_image', formData?.image ? formData?.image : null)
+    form.append('description_short_food', formData?.description_short_food)
+    form.append('_method', formData?.method || 'POST')
+    // console.log('🚀 ~ file: table-and-menu.js ~ line 7 ~ requires ~ form', form)
+    return form
+}
 
 const createMenu = async (formData) => {
     const require = requires(formData)
@@ -25,10 +36,30 @@ const createMenu = async (formData) => {
 }
 
 const updateMenu = async (formData) => {
+    console.log(
+        '🚀 ~ file: table-and-menu.js ~ line 31 ~ updateMenu ~ formData',
+        formData
+    )
     const require = requires(formData)
+    // let form = new FormData()
+
+    // form.append('name', formData.name)
+    // form.append('price', formData.price)
+    // form.append('category', formData.category)
+    // form.append('discount', formData.discount ? parseInt(formData.discount) : 0)
+    // const form = {
+    //     name: formData.name,
+    //     price: formData.price,
+    //     category: formData.category,
+    //     discount: formData.discount ? parseInt(formData.discount) : 0,
+    // }
+    console.log(
+        '🚀 ~ file: table-and-menu.js ~ line 50 ~ updateMenu ~ form',
+        require
+    )
     let result
     try {
-        const handleResponse = await httpClient.put(`menu/${formData.id}`, require)
+        const handleResponse = await httpClient.post(`menu/${formData.id}`, require)
         result = handleResponse.data
     } catch (error) {
         console.log(error)

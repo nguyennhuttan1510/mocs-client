@@ -1,4 +1,4 @@
-@import 'App.scss';
+@import 'styles/Theme';
 .detail-food {
     .slider-food {
         padding: 16px 0;
@@ -17,17 +17,34 @@
         }
 
         .icon-feedback {
-            .item {
-                &:first-child {
-                    margin-left: 0px;
+            .btn-feedback {
+                flex-direction: column;
+                .item {
+                    &.heart {
+                        &.active {
+                            color: red;
+                        }
+                    }
+                    &.like {
+                        &.active {
+                            color: blue;
+                        }
+                    }
+                    &.dislike {
+                        &.active {
+                            color: gray;
+                        }
+                    }
                 }
-                margin: 10px;
+                .count-feedback {
+                    font-size: 16px;
+                }
             }
         }
         .price-food {
             .price {
                 display: flex;
-                justify-content: end;
+                justify-content: flex-end;
                 align-items: baseline;
                 h2 {
                     display: inline;
@@ -44,7 +61,6 @@
                 border-radius: $border-radius;
                 align-items: center;
                 height: 40px;
-                // margin-top: 20px;
                 & div:last-child,
                 div:first-child {
                     font-size: 22px;

@@ -23,6 +23,10 @@ const TableDetail = (props) => {
         cash: 0,
     })
 
+    const listFoodOrder = get(detailTable, 'menu', [])
+    const isMakeFood = get(detailTable, 'isMakeFood')
+    const isPay = get(detailTable, 'isPay')
+
     useEffect(() => {
         setPriceBill((prevState) => ({
             ...prevState,
@@ -99,9 +103,6 @@ const TableDetail = (props) => {
 
     // ============================== END CONFIG COL TABLE
 
-    const listFoodOrder = get(detailTable, 'menu', [])
-    const isMakeFood = get(detailTable, 'isMakeFood')
-
     const handleSetIsVisible = () => {
         setIsVisible(false)
     }
@@ -119,6 +120,7 @@ const TableDetail = (props) => {
         const payload = {
             id: detailTable.id,
             server: profile,
+            socketID: detailTable.socketID,
         }
         emitTable.payBill(payload)
         setTimeout(() => {
@@ -135,6 +137,24 @@ const TableDetail = (props) => {
         },
         [listFoodOrder]
     )
+
+    const handleClickPanelPay = () => {
+        if (Object.keys(detailTable).length === 0) {
+            Notify('error', 'Error', "The Table hasn't been created")
+            return
+        }
+        if ((isMakeFood && isPay) || priceBill.cost === 0) {
+            setIsVisible(!isVisible)
+        } else {
+            Notify(
+                'error',
+                'Failed',
+                isMakeFood
+                    ? 'The customer has not yet requested payment!'
+                    : "The customer is ordering, can't pay!"
+            )
+        }
+    }
 
     return (
         <div className='dashboard'>
@@ -155,23 +175,12 @@ const TableDetail = (props) => {
                 X
             </Button>
             <div className='wrap_table_detail'>
-                <div
-                    className='total_cost'
-                    onClick={() =>
-                        isMakeFood || priceBill.cost === 0
-                            ? setIsVisible(!isVisible)
-                            : Notify(
-                                  'error',
-                                  'Failed',
-                                  "Client is ordering, can't pay!"
-                              )
-                    }
-                >
-                    {`${
+                <div className='total_cost' onClick={() => handleClickPanelPay()}>
+                    {`$ ${
                         detailTable.total_cost
                             ? constantFormat.Money(detailTable.total_cost)
                             : 0
-                    } VND`}
+                    }`}
                 </div>
                 <Tabs defaultActiveKey='1'>
                     <TabPane
@@ -228,7 +237,10 @@ const TableDetail = (props) => {
                                 icon={<CloudUploadOutlined />}
                                 size={'large'}
                                 onClick={() => {
-                                    emitTable.pushMenuToChef(table)
+                                    emitTable.pushMenuToChef({
+                                        IDTable: table.id,
+                                        roleUser: profile.position,
+                                    })
                                     Notify(
                                         'success',
                                         'Success',

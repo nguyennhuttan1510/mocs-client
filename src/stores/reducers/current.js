@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     titleHeader: '',
+    // IDTable: '',
 }
 
 const current = createSlice({
@@ -10,6 +11,9 @@ const current = createSlice({
     reducers: {
         setTitleHeader: (state, actions) =>
             void (state.titleHeader = actions.payload),
+        // setIDTable: (state, actions) => {
+        //     state.IDTable = actions.payload
+        // },
     },
 })
 export const currentState = current.actions

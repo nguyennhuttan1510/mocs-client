@@ -1,12 +1,6 @@
 import React, { useState } from 'react'
-import {
-    DesktopOutlined,
-    PieChartOutlined,
-    FileOutlined,
-    TeamOutlined,
-    UserOutlined,
-} from '@ant-design/icons'
-import { Layout, Menu, Breadcrumb } from 'antd'
+import { PieChartOutlined, UserOutlined } from '@ant-design/icons'
+import { Layout, Menu } from 'antd'
 
 import './style.scss'
 import { NavLink } from 'react-router-dom'
@@ -17,11 +11,7 @@ import useHeader from 'hook/useHeader'
 
 const Main = (props) => {
     const [collapsed, setCollapsed] = useState(false)
-    // const dashboard = useSelector((state: any) => state.dashboard);
     const profile = useSelector((state) => state.user.profile)
-    // const dispatch = useDispatch();
-    // let router = props.match.path;
-    // const { staffs } = dashboard;
     const dispatch = useDispatchAction()
     const onCollapse = () => {
         setCollapsed(!collapsed)
@@ -53,12 +43,7 @@ const Main = (props) => {
                             </NavLink>
                         </Menu.Item>
 
-                        <SubMenu
-                            key='sub1'
-                            icon={<UserOutlined />}
-                            title='Admin'
-                            // className={`${staffs.length === 0 && "hide-icon"}`}
-                        >
+                        <SubMenu key='sub1' icon={<UserOutlined />} title='Admin'>
                             <Menu.Item key={9}>
                                 <NavLink
                                     to='/admin/management-business'
@@ -106,10 +91,6 @@ const Main = (props) => {
                                     LOGOUT
                                 </Menu.Item>
                             </Menu>
-                            {/* <span className='username-header'>
-                                tan
-                            </span>
-                            <UserOutlined className='icon-header-right' /> */}
                         </div>
                     </Header>
                     <Content className='content' style={{ overflow: 'auto' }}>

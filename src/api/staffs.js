@@ -4,18 +4,17 @@ const httpClient = HttpClient()
 
 const createStaff = async (objStaff) => {
     var form = new FormData()
-    // form.append("avatar", "");
-    form.append('position', objStaff.position)
-    // form.append("id", "10");
+    form.append('avatar', objStaff.avatar)
+    form.append('position', objStaff?.position || 'Client')
     form.append('name', objStaff.name)
-    // form.append("phone", "");
+    form.append('phone', objStaff.phone)
     form.append('username', objStaff.username)
     form.append('salary', objStaff.salary)
-    // form.append("password", "123456");
+    form.append('password', objStaff.password)
     let result
     try {
         const handleResponse = await httpClient.post('/staff/', form)
-        result = await handleResponse.data
+        result = handleResponse.data
     } catch (error) {
         console.log(error)
     }
@@ -23,12 +22,18 @@ const createStaff = async (objStaff) => {
 }
 
 const updateStaff = async (objStaff) => {
+    console.log('🚀 ~ file: staffs.js ~ line 25 ~ updateStaff ~ objStaff', objStaff)
+    var form = new FormData()
+    form.append('avatar', objStaff.avatar)
+    form.append('position', objStaff?.position || 'Client')
+    form.append('name', objStaff.name)
+    form.append('phone', objStaff.phone)
+    form.append('username', objStaff.username)
+    form.append('salary', objStaff.salary || 0)
+    form.append('password', objStaff.password || '')
     let result
     try {
-        const handleResponse = await httpClient.patch(
-            `staff/${objStaff.id}`,
-            objStaff
-        )
+        const handleResponse = await httpClient.post(`staff/${objStaff.id}`, form)
         result = await handleResponse.data
     } catch (error) {
         console.log(error)

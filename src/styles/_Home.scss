@@ -1,164 +1,183 @@
 // ========================================STAFFDETAIL=================================
 $fontWeight: 700;
 .site-layout {
-  .content {
-    margin: 0px 16px;
-    .breadcrumb_title {
-      margin: 16px 0px;
-      font-weight: $fontWeight;
-    }
-    .site-layout-background {
-      padding: 24px;
-      min-height: 360px;
-      .list_table {
-        margin-bottom: 30px;
-
-        .table {
-          padding: 7px;
-          display: flex;
-          text-align: center;
-          justify-content: center;
-          align-items: center;
-          width: 80px;
-          height: 80px;
-          background-color: lightseagreen;
-          color: black;
-          cursor: pointer;
-          &.active {
-            background-color: rgb(0, 186, 0);
-          }
-          &.processing {
-            background-color: #0047ba;
-          }
+    .content {
+        margin: 0px 16px;
+        .breadcrumb_title {
+            margin: 16px 0px;
+            font-weight: $fontWeight;
         }
-      }
+        .site-layout-background {
+            padding: 24px;
+            min-height: 360px;
+            .list_table {
+                margin-bottom: 30px;
+
+                .table {
+                    padding: 7px;
+                    display: flex;
+                    text-align: center;
+                    justify-content: center;
+                    align-items: center;
+                    width: 80px;
+                    height: 80px;
+                    background-color: lightseagreen;
+                    color: black;
+                    cursor: pointer;
+                    &.active {
+                        background-color: rgb(0, 186, 0);
+                    }
+                    &.processing {
+                        background-color: #0047ba;
+                    }
+                    &.call-pay {
+                        background-color: #ffa827;
+                    }
+                }
+            }
+        }
     }
-  }
-  .close_table {
-    position: absolute;
-    border-bottom-left-radius: 12px;
-    top: 64px;
-    padding: 5px 20px;
-    background-color: #fd3434;
-    right: 0px;
-    color: white;
-    font-weight: 800;
-  }
+    .close_table {
+        position: absolute;
+        border-bottom-left-radius: 12px;
+        top: 64px;
+        padding: 5px 20px;
+        background-color: #fd3434;
+        right: 0px;
+        color: white;
+        font-weight: 800;
+    }
 }
 .wrap_table_detail {
-  position: relative;
-  .footer-action {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 20px;
-  }
-  .total_cost {
-    font-size: 1.8vw;
+    position: relative;
+    .footer-action {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 20px;
+    }
+    .total_cost {
+        font-size: 1.8vw;
+        font-weight: 700;
+        position: absolute;
+        right: 0%;
+        display: flex;
+        width: 18vw;
+        height: 35px;
+        color: #ff0303de;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+        cursor: pointer;
+    }
+}
+.total_cost {
+    font-size: 2.5vw;
     font-weight: 700;
-    position: absolute;
     right: 0%;
     display: flex;
     width: 18vw;
     height: 35px;
     color: #ff0303de;
-    justify-content: center;
     align-items: center;
-    z-index: 2;
-    cursor: pointer;
-  }
-}
-.total_cost {
-  font-size: 2.5vw;
-  font-weight: 700;
-  right: 0%;
-  display: flex;
-  width: 18vw;
-  height: 35px;
-  color: #ff0303de;
-  align-items: center;
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 .ant-tabs-tab {
-  .dashboard {
-    &.ant-tabs-tab-active {
-      &:nth-child(3) {
-        color: #1890ff;
-      }
+    .dashboard {
+        &.ant-tabs-tab-active {
+            &:nth-child(3) {
+                color: #1890ff;
+            }
+        }
+        &:nth-child(3) {
+            border: 1px solid;
+            padding: 0px 15px;
+            border-radius: 5px;
+        }
     }
-    &:nth-child(3) {
-      border: 1px solid;
-      padding: 0px 15px;
-      border-radius: 5px;
+    .ant-tabs-tab-btn {
+        font-weight: 600;
+        font-family: sans-serif;
     }
-  }
-  .ant-tabs-tab-btn {
-    font-weight: 600;
-    font-family: sans-serif;
-  }
 }
 .ant-btn {
-  &.delete {
-    color: #ff4949;
-    background: #fff;
-    border-color: #ff4949;
-    font-weight: 600;
-    &:hover {
-      color: #ff0000;
-      background: #fff;
-      border-color: #ff0000;
+    &.delete {
+        color: #ff4949;
+        background: #fff;
+        border-color: #ff4949;
+        font-weight: 600;
+        &:hover {
+            color: #ff0000;
+            background: #fff;
+            border-color: #ff0000;
+        }
     }
-  }
 }
 
 .noti-table-bill {
-  &.food-done {
-    color: #30ff4c;
-  }
-  color: #ff3030;
-  font-size: 14px;
-  font-weight: 600;
+    &.food-done {
+        color: #30ff4c;
+    }
+    color: #ff3030;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .ant-badge-count {
-  box-shadow: 0 0 0 3px #f0f2f5 !important;
+    box-shadow: 0 0 0 3px #f0f2f5 !important;
 }
 .noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
   supported by Chrome and Opera */
 }
 
 // =====================================CHEFDETAIL====================================
 
 .icon-avatar {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: chartreuse;
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #acf564;
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    font-weight: 600;
 }
 
 #detail-chef {
-  .ant-badge {
-    width: 100%;
-    .cardfood {
-      width: 100%;
-      &.pending {
-        .ant-card-head {
-          background-color: rgb(186, 186, 186);
+    .ant-badge {
+        width: 100%;
+        .cardfood {
+            .ant-card-body {
+                padding: 0px;
+                margin: 0px;
+                width: 100%;
+                height: 130px;
+                .content-food {
+                    width: 100%;
+                    height: 100%;
+                    background-size: cover;
+                    background-position: center;
+                }
+            }
+            width: 100%;
+            &.pending {
+                .ant-card-head {
+                    background-color: rgb(186, 186, 186);
+                }
+            }
+            &.done {
+                .ant-card-head {
+                    background-color: rgb(77, 230, 77);
+                }
+            }
         }
-      }
-      &.done {
-        .ant-card-head {
-          background-color: rgb(77, 230, 77);
-        }
-      }
     }
-  }
 }

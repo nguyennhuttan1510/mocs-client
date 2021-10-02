@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Table, Space, Button, Row, Col } from 'antd'
-import { DeleteOutlined } from '@ant-design/icons'
+import { DeleteOutlined, FormOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Notify } from 'components/Notify'
@@ -9,7 +9,7 @@ import { staffAPI } from 'api/staffs'
 import { constantFormat } from 'common/HandleFormat'
 
 const InfoStaff = (props) => {
-    const { setIsVisible } = props
+    const { setIsVisible, setFormCreate, setIsUpdate } = props
 
     const listStaff = useSelector((state) => state.dashboard.staffs)
 
@@ -19,6 +19,8 @@ const InfoStaff = (props) => {
             .then((res) => {
                 if (res.status) {
                     Notify('success', 'Success', res.message)
+                    emitManage.getAllStaff()
+                    emitManage.getAllManagement()
                 } else {
                     Notify('error', 'Failed', res.message)
                 }
@@ -26,8 +28,6 @@ const InfoStaff = (props) => {
             .catch((err) => {
                 console.log(err.message)
             })
-        emitManage.getAllStaff()
-        emitManage.getAllManagement()
     }
     const columns = [
         {
@@ -49,6 +49,7 @@ const InfoStaff = (props) => {
             title: 'Phone',
             dataIndex: 'phone',
             key: 'phone',
+            render: (text) => (text ? text : 'No Phone'),
         },
         {
             title: 'Position',
@@ -61,26 +62,6 @@ const InfoStaff = (props) => {
             key: 'createdAt',
             render: (text) => constantFormat.Date(text),
         },
-        // {
-        //   title: "Tags",
-        //   key: "tags",
-        //   dataIndex: "tags",
-        //   render: (tags) => (
-        //     <>
-        //       {tags.map((tag) => {
-        //         let color = tag.length > 5 ? "geekblue" : "green";
-        //         if (tag === "loser") {
-        //           color = "volcano";
-        //         }
-        //         return (
-        //           <Tag color={color} key={tag}>
-        //             {tag.toUpperCase()}
-        //           </Tag>
-        //         );
-        //       })}
-        //     </>
-        //   ),
-        // },
         {
             title: 'Action',
             key: 'action',
@@ -92,21 +73,52 @@ const InfoStaff = (props) => {
                         }}
                         style={{ color: 'red' }}
                     />
+                    <FormOutlined
+                        onClick={() => {
+                            setIsVisible(true)
+                            setIsUpdate(true)
+                            setFormCreate({
+                                id: record.id,
+                                username: record.username,
+                                name: record.name,
+                                phone: record.phone,
+                                position: record.position,
+                                salary: record.salary,
+                                bonus: record.bonus,
+                                avatar: record.avatar,
+                            })
+                        }}
+                        style={{ color: 'green' }}
+                    />
                 </Space>
             ),
         },
     ]
 
-    const data = listStaff.map((e, index) => {
-        return {
-            id: e.id,
-            count: index + 1,
-            name: e.name,
-            phone: e.phone ? e.phone : 'No Phone',
-            position: e.position,
-            createdAt: e.createdAt,
-        }
-    })
+    const convertStaffData = () => {
+        let result = []
+        if (!listStaff) return result
+        listStaff.forEach((e, index) => {
+            if (e.position !== 'Client') {
+                result.push({
+                    id: e.id,
+                    count: index + 1,
+                    username: e.username,
+                    name: e.name,
+                    phone: e.phone,
+                    position: e.position,
+                    bonus: e.bonus,
+                    salary: e.salary,
+                    avatar: e.avatar,
+                    createdAt: e.createdAt,
+                })
+            }
+        })
+        return result
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const data = useMemo(() => convertStaffData(), [listStaff])
 
     return (
         <div>
@@ -117,6 +129,8 @@ const InfoStaff = (props) => {
                             <Button
                                 onClick={() => {
                                     setIsVisible(true)
+                                    setIsUpdate(false)
+                                    setFormCreate({})
                                 }}
                             >
                                 Create Staff

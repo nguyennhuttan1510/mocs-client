@@ -1,60 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
 
-$border-radius: 20px;
-//COLOR_BUTTON
-$primary-color: rgb(25, 118, 210);
-$danger-color: rgb(255, 49, 49);
-$warning-color: rgb(253, 164, 29);
-$success-color: #00e407;
-//ANYTHING WHITE COLOR
-$theme-color: white;
-@mixin bg-image($border-radius, $isBackground, $opacity) {
-    border-radius: $border-radius;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    @if $isBackground {
-        .bg-black {
-            width: 100%;
-            height: 100%;
-            background-color: $isBackground;
-            opacity: $opacity;
-            position: absolute;
-        }
-    }
-}
-
-.btn {
-    height: 36px;
-    border-radius: $border-radius;
-    &.btn--primary {
-        background-color: $primary-color;
-    }
-    &.btn--danger {
-        background-color: $danger-color;
-    }
-    &.btn--success {
-        background-color: $success-color;
-    }
-    &.btn--warning {
-        background-color: $warning-color;
-    }
-}
-
-.header {
-    &__wrap-icon {
-        display: contents;
-    }
-    &__icon-back {
-        color: $theme-color;
-    }
-}
 html {
     height: 100%;
-    overflow-x: hidden;
     body {
         height: 100%;
         font-family: 'Cairo', sans-serif;
-        overflow-x: hidden;
+        #root {
+            overflow-x: clip;
+        }
     }
 }

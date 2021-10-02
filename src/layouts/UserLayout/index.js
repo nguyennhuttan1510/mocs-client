@@ -12,36 +12,61 @@ import {
     AppBar,
     Typography,
     CssBaseline,
+    IconButton,
 } from '@mui/material'
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
-import { NavLink } from 'react-router-dom'
-const UserLayout = (props) => {
-    const { children, isHeader, titleHeader } = props
+import { KeyboardBackspace, Logout } from '@mui/icons-material'
+import { useHistory, useLocation } from 'react-router-dom'
+import { CONSTANT } from 'stores/constants'
+import { useDispatch } from 'react-redux'
 
+const UserLayout = (props) => {
+    const { children, isHeader, titleHeader, hasIconHeaderRight } = props
+    const history = useHistory()
+    const location = useLocation()
+    const dispatch = useDispatch()
     return (
         <Grid xs={12}>
-            <Box>
+            <Box sx={{ pb: 7 }}>
                 <CssBaseline />
                 {/* HEADER */}
                 {isHeader && (
                     <>
                         <HideOnScroll {...props}>
-                            <AppBar>
-                                <Toolbar className='header'>
+                            <AppBar className='header'>
+                                <Toolbar>
                                     <Grid container alignItems='center' xs={3}>
-                                        <NavLink
-                                            to='/users/3'
+                                        <IconButton
                                             className='header__wrap-icon'
+                                            onClick={() => {
+                                                history.goBack()
+                                            }}
+                                            component='span'
                                         >
-                                            <KeyboardBackspaceIcon className='header__icon-back' />
-                                        </NavLink>
+                                            <KeyboardBackspace className='header__icon-back' />
+                                        </IconButton>
                                     </Grid>
                                     <Grid container justifyContent='center' xs={6}>
                                         <Typography variant='h6' component='div'>
                                             {titleHeader}
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={3}></Grid>
+                                    <Grid
+                                        container
+                                        alignItems='center'
+                                        justifyContent='flex-end'
+                                        xs={3}
+                                    >
+                                        {hasIconHeaderRight && (
+                                            <Logout
+                                                onClick={() => {
+                                                    dispatch({
+                                                        type: CONSTANT.ACTION_TYPE
+                                                            .LOGOUT,
+                                                    })
+                                                }}
+                                            />
+                                        )}
+                                    </Grid>
                                 </Toolbar>
                             </AppBar>
                         </HideOnScroll>
@@ -54,7 +79,7 @@ const UserLayout = (props) => {
                     <Box sx={{ my: 2 }}>{children}</Box>
                 </Container>
                 {/* FOOTER */}
-                <Footer />
+                <Footer pathCurrent={location.pathname} />
             </Box>
         </Grid>
     )
@@ -69,9 +94,6 @@ export default UserLayout
 
 function HideOnScroll(props) {
     const { children, window } = props
-    // Note that you normally won't need to set the window ref as useScrollTrigger
-    // will default to window.
-    // This is only being set here because the demo is in an iframe.
     const trigger = useScrollTrigger({
         target: window ? window() : undefined,
     })
@@ -85,9 +107,5 @@ function HideOnScroll(props) {
 
 HideOnScroll.propTypes = {
     children: PropTypes.element.isRequired,
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
     window: PropTypes.func,
 }

@@ -1,0 +1,8 @@
+@import 'styles/Theme';
+.bill-page {
+    .bg-pay-bill {
+        width: 300px;
+        height: 300px;
+        @include bg-image(0, null, null);
+    }
+}

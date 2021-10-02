@@ -52,6 +52,7 @@ const ChartBestSeller = (props) => {
         series.columns.template.width = 0.01
         series.tooltip.pointerOrientation = 'horizontal'
 
+        // eslint-disable-next-line no-unused-vars
         let bullet = series.bullets.create(am4charts.CircleBullet)
 
         chart.cursor = new am4charts.XYCursor()
@@ -63,6 +64,7 @@ const ChartBestSeller = (props) => {
         return () => {
             chart.dispose()
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
         <div className='best-seller'>

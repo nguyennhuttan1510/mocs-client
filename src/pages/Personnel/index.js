@@ -11,6 +11,7 @@ import './style.scss'
 
 const Personnel = (props) => {
     const [isVisible, setIsVisible] = useState(false)
+    const [isUpdate, setIsUpdate] = useState(false)
     const [formCreate, setFormCreate] = useState({})
 
     const handleChangeData = (value, name) => {
@@ -19,11 +20,25 @@ const Personnel = (props) => {
     const { TabPane } = Tabs
 
     const handleClickOK = async () => {
+        if (isUpdate) {
+            const res = await staffAPI.updateStaff(formCreate)
+            if (res.status) {
+                Notify('success', 'Success', res.message)
+                emitManage.getAllStaff()
+                emitManage.getAllManagement()
+            } else {
+                Notify('error', 'Fail', res.message)
+            }
+            setFormCreate({})
+            return
+        }
         await staffAPI
             .createStaff(formCreate)
             .then((res) => {
                 if (res.status) {
                     Notify('success', 'Success', res.message)
+                    emitManage.getAllStaff()
+                    emitManage.getAllManagement()
                 } else {
                     Notify('error', 'Fail', res.message)
                 }
@@ -31,8 +46,6 @@ const Personnel = (props) => {
             .catch((err) => {
                 console.log(err.message)
             })
-        emitManage.getAllStaff()
-        emitManage.getAllManagement()
     }
 
     const handleSetIsVisible = () => {
@@ -43,6 +56,7 @@ const Personnel = (props) => {
         <div className='management-admin'>
             <ModalHome
                 data={formCreate}
+                isDisable={isUpdate}
                 contents={'createStaff'}
                 isVisible={isVisible}
                 handleChangeData={handleChangeData}
@@ -51,7 +65,11 @@ const Personnel = (props) => {
             />
             <Tabs defaultActiveKey='1'>
                 <TabPane tab='INFORMATION' key='1'>
-                    <InfoStaff setIsVisible={setIsVisible} />
+                    <InfoStaff
+                        setIsVisible={setIsVisible}
+                        setFormCreate={setFormCreate}
+                        setIsUpdate={setIsUpdate}
+                    />
                 </TabPane>
                 <TabPane tab='SALARY' key='2'>
                     <SalaryStaff />

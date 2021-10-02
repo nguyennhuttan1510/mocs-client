@@ -1,7 +1,7 @@
 import { socket } from './SocketClient'
 
 const addTable = (payload) => {
-    socket.emit('add-table', payload)
+    socket.emit('add-table', { ...payload, socketID: socket.id })
 }
 
 const addMenu = (payload) => {
@@ -23,6 +23,9 @@ const pushMenuToChef = (payload) => {
 const chefSelectFood = (payload) => {
     socket.emit('make-food', payload)
 }
+// const loginStaff = () => {
+//     socket.emit('login-success')
+// }
 
 /* 
     ACTION MANAGEMENT STAFF
@@ -41,7 +44,26 @@ const getAllTableDefault = () => {
 }
 
 const getAllManagement = () => {
-    socket.emit('get-data-management')
+    socket.emit('get-all-data-management')
+}
+
+/* 
+    ACTION CLIENT
+*/
+
+const callPayBill = (objTable) => {
+    socket.emit('client-pay-bill', objTable)
+}
+const setFeedBack = (objFeedBack) => {
+    socket.emit('client-feedback', objFeedBack)
+}
+
+const getProfile = (idClient) => {
+    socket.emit('get-profile-client', idClient)
+}
+
+const login = (position) => {
+    socket.emit('login', { ...position, socketID: socket.id })
 }
 
 export const emitTable = {
@@ -57,10 +79,22 @@ export const emitTable = {
     pushMenuToChef,
 
     chefSelectFood,
+
+    callPayBill,
 }
 export const emitManage = {
     getAllStaff,
     getAllMenu,
     getAllTableDefault,
     getAllManagement,
+}
+
+export const emitLogin = {
+    // loginStaff,
+    login,
+}
+export const emitClient = {
+    // loginStaff,
+    setFeedBack,
+    getProfile,
 }

@@ -17,6 +17,8 @@ const Profile = lazy(() => import('pages/Profile'))
 const Users = lazy(() => import('pages/Users'))
 const DetailFood = lazy(() => import('pages/Users/subpages/DetailFood'))
 const ListOrder = lazy(() => import('pages/Users/subpages/ListOrder'))
+const Progress = lazy(() => import('pages/Users/subpages/Progress'))
+const ProfileClient = lazy(() => import('pages/Users/subpages/ProfileClient'))
 
 const Routes = () => {
     // CONFIG ROUTE
@@ -62,7 +64,7 @@ const Routes = () => {
             name: 'Profile Page',
         },
         {
-            path: '/users/:id',
+            path: '/users',
             component: Users,
             layout: UserLayout,
             exact: true,
@@ -77,12 +79,29 @@ const Routes = () => {
             isHeader: true, //show header for UI Mobile
         },
         {
-            path: '/users/order/:id',
+            path: '/users/order',
             component: ListOrder,
             layout: UserLayout,
             exact: true,
             name: 'Your Order',
             isHeader: true, //show header for UI Mobile
+        },
+        {
+            path: '/users/bill',
+            component: Progress,
+            layout: UserLayout,
+            exact: true,
+            name: 'Your Bill',
+            isHeader: true, //show header for UI Mobile
+        },
+        {
+            path: '/users/profile',
+            component: ProfileClient,
+            layout: UserLayout,
+            exact: true,
+            name: 'Profile',
+            isHeader: true, //show header for UI Mobile
+            hasIconHeaderRight: true, // Show icon logout
         },
         {
             path: '*',
@@ -120,6 +139,7 @@ const Routes = () => {
                         exact={item.exact}
                         path={item.path}
                         isHeader={item?.isHeader || false}
+                        hasIconHeaderRight={item.hasIconHeaderRight}
                     />
                 ))}
             </Switch>

@@ -1,13 +1,18 @@
-@import 'App.scss';
+@import 'styles/Theme';
 .home-user-page {
     .name {
         font-weight: 600;
     }
     .avatar {
-        background-color: gray;
+        background: $bg-gradient;
         width: 45px;
         height: 45px;
         border-radius: 10px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+        font-weight: 600;
     }
     .card-food {
         padding: 8px;

@@ -5,7 +5,7 @@ import { constantFormat } from 'common/HandleFormat'
 import ModalHome from 'components/Modal'
 import { Notify } from 'components/Notify'
 import TableComponent from 'components/Table'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { emitTable } from 'services/SocketIO/EmitServer'
 import 'styles/_Home.scss'
@@ -51,6 +51,7 @@ const Business = () => {
     }
     const handleSetIsVisible = () => {
         setIsVisible(false)
+        setCreateForm({})
     }
 
     const dataListMenu =
@@ -64,6 +65,8 @@ const Business = () => {
                     price: e.price,
                     discount: e.discount,
                     category: e.category,
+                    url_image: e.url_image,
+                    description_short_food: e.description_short_food,
                 }
             }
         )
@@ -163,6 +166,9 @@ const Business = () => {
                                 price: record.price,
                                 category: record.category,
                                 discount: record.discount,
+                                url_image: record.url_image,
+                                description_short_food:
+                                    record.description_short_food,
                             })
                         }}
                         style={{ color: 'green' }}
@@ -224,7 +230,11 @@ const Business = () => {
         }))
         return result
     }
-    const dataConvertBestSeller = convertDataBestSeller()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const dataConvertBestSeller = useMemo(
+        () => convertDataBestSeller(),
+        [dataBestSeller]
+    )
     return (
         <>
             <ModalHome

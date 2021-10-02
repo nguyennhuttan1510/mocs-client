@@ -7,6 +7,7 @@ import ListTable from './components/ListTable'
 import { emitTable } from 'services/SocketIO/EmitServer'
 import { Notify } from 'components/Notify'
 import 'styles/_Home.scss'
+import { HandleAddFoodForTable } from 'common/HandleAddFoodForTable'
 
 const Home = (props) => {
     const state = useSelector((state) => state.dashboard)
@@ -34,13 +35,12 @@ const Home = (props) => {
         if (profile?.position === 'Staff') {
             // IF POSITION IS STAFF => TABLE IS CREATED
             if (objTable?.id) {
-                const initObjTable = {
+                const initialTableClient = {
                     id: objTable.id,
                     name: objTable.name,
-                    menu: [],
-                    total_cost: 0,
+                    roleUser: profile?.position,
                 }
-                emitTable.addTable(initObjTable)
+                emitTable.addTable(initialTableClient)
             }
         }
         dispatch(tableAction.setIsDetail(true))
@@ -57,23 +57,7 @@ const Home = (props) => {
             Notify('error', 'Error', "Admin isn't allow do this action")
             return
         }
-        const total = (objFood?.price * (100 - objFood.discount)) / 100
-        const menu = {
-            //a new food is added into list menu
-            id: objFood?.id,
-            name: objFood?.name,
-            count: 1,
-            price: objFood?.price,
-            discount: objFood.discount,
-            total: total,
-            chef: false,
-            status: 'Order', // Order| Pending | Done
-        }
-        const payload = {
-            id: idTable,
-            food: menu,
-        }
-        emitTable.addMenu(payload)
+        HandleAddFoodForTable(objFood, idTable, profile.position)
     }
 
     return (

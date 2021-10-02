@@ -1,21 +1,23 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useMemo, useState } from 'react'
 import './style.scss'
 
-import {
-    Grid,
-    Card,
-    CardActions,
-    CardContent,
-    CardMedia,
-    Button,
-    Typography,
-} from '@mui/material'
+import { Grid, Card, CardContent, CardMedia } from '@mui/material'
 import { LocalOffer } from '@mui/icons-material'
 import Slider from 'react-slick'
 import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import {
+    HandleConvertURLImage,
+    HandleSessionsOfDay,
+} from 'common/HandleConvertURLImage'
+import { HandleShowCharFirstName } from 'common/HandleFormat'
+import { LIST_CATEGORY } from 'constants/index'
 const Users = (props) => {
-    const LIST_FOOD = [1, 2, 3, 4, 5, 6]
+    const listEvent = useSelector((state) => state.home.listEvent)
+    const profile = useSelector((state) => state.user.profile)
+    const listMenu = useSelector((state) => state.home.listMenu)
+
+    const [currentCategory, setCurrentCategory] = useState('food')
 
     const settings = {
         dots: true,
@@ -28,19 +30,41 @@ const Users = (props) => {
     const settingsCategory = {
         dots: true,
         className: 'padding-block',
-        // centerMode: true,
         infinite: true,
         slidesToShow: 2,
         speed: 500,
     }
+
+    const handleSelectCategory = (category) => {
+        if (!category) return
+        category = category.trim().toLowerCase()
+        setCurrentCategory(category)
+    }
+
+    const filterListMenuByCategory = () => {
+        let result = []
+        if (!listMenu) return result
+        result = listMenu.filter((e) => e.category === currentCategory)
+        console.log(
+            '🚀 ~ file: index.js ~ line 48 ~ filterListMenuByCategory ~ result',
+            result
+        )
+        return result
+    }
+
+    const listMenuFilterByCategory = useMemo(
+        () => filterListMenuByCategory(),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [currentCategory]
+    )
 
     return (
         <div className='home-user-page'>
             <Grid container>
                 <Grid item xs={8}>
                     <div>
-                        <h4>Good Morning</h4>
-                        <h2 className='name'>Nguyen Nhut Tan</h2>
+                        <h3>{HandleSessionsOfDay()}</h3>
+                        <h2 className='name'>{profile.name}</h2>
                     </div>
                 </Grid>
                 <Grid
@@ -50,113 +74,81 @@ const Users = (props) => {
                     alignItems='flex-end'
                     style={{ display: 'flex', marginBottom: '15px' }}
                 >
-                    <div className='avatar'></div>
+                    <div className='avatar'>
+                        {HandleShowCharFirstName(profile.name)}
+                    </div>
                 </Grid>
             </Grid>
             <div className='slider'>
                 <Slider {...settings}>
-                    <div>
-                        <div
-                            className='block-slider'
-                            style={{
-                                backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/pexels-christel-jensen-628776.jpg)`,
-                            }}
-                        >
-                            <div className='bg-black'></div>
-                            <h2 className='title'>Monday Off 40%</h2>
-                        </div>
-                    </div>
-                    <div>
-                        <div
-                            className='block-slider'
-                            style={{
-                                backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/pexels-christel-jensen-628776.jpg)`,
-                            }}
-                        >
-                            <div className='bg-black'></div>
-                            <h2 className='title'>Saturday Off 40%</h2>
-                        </div>
-                    </div>
-                    <div>
-                        <div
-                            className='block-slider'
-                            style={{
-                                backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/pexels-christel-jensen-628776.jpg)`,
-                            }}
-                        >
-                            <div className='bg-black'></div>
-                            <h2 className='title'>Sunday Off 40%</h2>
-                        </div>
-                    </div>
+                    {listEvent?.length &&
+                        listEvent.map((e, keys) => (
+                            <div key={keys}>
+                                <div
+                                    className='block-slider'
+                                    style={{
+                                        backgroundImage: `url(${HandleConvertURLImage(
+                                            e.url_image
+                                        )})`,
+                                    }}
+                                >
+                                    <div className='bg-black'></div>
+                                    <h2 className='title'>{e.name}</h2>
+                                </div>
+                            </div>
+                        ))}
                 </Slider>
             </div>
             <h2 className='title-bestseller'>Category</h2>
             <div className='slider-category'>
                 <Slider {...settingsCategory}>
-                    <div>
-                        <div
-                            className='category'
-                            style={{
-                                backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/pexels-christel-jensen-628776.jpg)`,
-                            }}
-                        >
-                            <div className='bg-black'></div>
-                            <h3 className='title-category'>Sunday Off 40%</h3>
-                        </div>
-                    </div>
-                    <div>
-                        <div
-                            className='category'
-                            style={{
-                                backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/pexels-christel-jensen-628776.jpg)`,
-                            }}
-                        >
-                            <div className='bg-black'></div>
-                            <h3 className='title-category'>Sunday Off 40%</h3>
-                        </div>
-                    </div>
-                    <div>
-                        <div
-                            className='category'
-                            style={{
-                                backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/pexels-christel-jensen-628776.jpg)`,
-                            }}
-                        >
-                            <div className='bg-black'></div>
-                            <h3 className='title-category'>Sunday Off 40%</h3>
-                        </div>
-                    </div>
+                    {LIST_CATEGORY?.length &&
+                        LIST_CATEGORY?.map((e, keys) => (
+                            <div key={keys}>
+                                <div
+                                    onClick={() => {
+                                        handleSelectCategory(e.category)
+                                    }}
+                                    className='category'
+                                    style={{
+                                        backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${e.image})`,
+                                    }}
+                                >
+                                    <div className='bg-black'></div>
+                                    <h3 className='title-category'>{e.title}</h3>
+                                </div>
+                            </div>
+                        ))}
                 </Slider>
             </div>
             <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 3 }}>
                 <Grid item xs={12}>
-                    <h2 className='title-bestseller'>Bestseller</h2>
+                    <h2 className='title-bestseller'>Menu</h2>
                 </Grid>
-                {LIST_FOOD.map((e) => (
-                    <Grid item xs={6}>
-                        <NavLink to='/users/food-detail/1'>
+                {listMenuFilterByCategory?.map((e, keys) => (
+                    <Grid key={keys} item xs={6}>
+                        <NavLink to={`/users/food-detail/${e.id}`}>
                             <Card sx={{ maxWidth: 345 }}>
                                 <CardMedia
                                     component='img'
                                     height='140'
-                                    src={`${process.env.PUBLIC_URL}/assets/images/pexels-christel-jensen-628776.jpg`}
+                                    src={`${
+                                        process.env.REACT_APP_API_SERVER +
+                                        e.url_image
+                                    }`}
                                     alt='green iguana'
                                 />
                                 <CardContent className='card-food'>
-                                    <h3 className='title'>Shusi Kinamoto</h3>
-                                    <p>Lizards are a wide spread</p>
+                                    <h3 className='title'>{e.name}</h3>
+                                    <p>{e.description_short_food}</p>
                                     <h3 className='price'>
                                         <LocalOffer
                                             className='icon-price'
                                             fontSize='small'
                                         />
-                                        $8
+                                        ${e.price}
                                     </h3>
                                 </CardContent>
-                                {/* <CardActions>
-                            <Button size='small'>Share</Button>
-                            <Button size='small'>Learn More</Button>
-                        </CardActions> */}
                             </Card>
                         </NavLink>
                     </Grid>
@@ -165,7 +157,5 @@ const Users = (props) => {
         </div>
     )
 }
-
-Users.propTypes = {}
 
 export default Users

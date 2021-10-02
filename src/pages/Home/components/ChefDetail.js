@@ -7,11 +7,14 @@ import 'styles/_Home.scss'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import { emitTable } from 'services/SocketIO/EmitServer'
+import { constantFormat } from 'common/HandleFormat'
+import { HandleConvertURLImage } from 'common/HandleConvertURLImage'
 
 const ChefDetail = (props) => {
     const { table } = props
     const [isVisible, setIsVisible] = useState(false)
     const [currentFood, setCurrentFood] = useState(null)
+
     const [makeFood, setMakeFood] = useState({
         idFood: 0,
         idTable: 0,
@@ -73,13 +76,21 @@ const ChefDetail = (props) => {
                                                 handleMakeFood(e.id, table.id)
                                             }}
                                         >
-                                            <div>note</div>
+                                            <div
+                                                className='content-food'
+                                                style={{
+                                                    backgroundImage: `url(${HandleConvertURLImage(
+                                                        e?.url_image
+                                                    )})`,
+                                                }}
+                                            ></div>
                                             {e.chef && (
                                                 <>
-                                                    <span className='mr-2'>
-                                                        {e.chef.name}
-                                                    </span>
-                                                    <div className='icon-avatar'></div>
+                                                    <div className='icon-avatar'>
+                                                        {constantFormat.HandleShowCharFirstName(
+                                                            e.chef.name
+                                                        )}
+                                                    </div>
                                                 </>
                                             )}
                                         </Card>

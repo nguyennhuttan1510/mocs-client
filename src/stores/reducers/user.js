@@ -9,11 +9,6 @@ const user = createSlice({
     initialState: initialState,
     reducers: {
         loginSuccess(state, action) {
-            console.log(
-                '🚀 ~ file: user.js ~ line 12 ~ loginSuccess ~ action',
-                action.payload
-            )
-
             state.profile = action.payload
         },
         loginFail(state, action) {
